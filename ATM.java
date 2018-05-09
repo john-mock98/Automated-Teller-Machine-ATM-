@@ -19,6 +19,12 @@ public class ATM {
 	static Scanner accountsdbReader;
 	static Scanner userInput = new Scanner(System.in);
 
+	/*
+	*	Creates new account 
+	*
+	*
+	*
+	*/
 	public static ATMAccount createAccount() {
 		String userName;
 		double userBalance;
@@ -28,6 +34,7 @@ public class ATM {
 		userInput.nextLine();
 		userName = userInput.nextLine();
 
+		//Requests digits 1 by 1 for the pin number
 		String accPin = "";
 		for (int i = 1; i < 5; i++) {
 			digit = -1;
@@ -38,8 +45,7 @@ public class ATM {
 			accPin += digit;
 		}
 
-		System.out
-				.println("Please put the amount of money you would like to " + "initially deposit into the account: ");
+		System.out.println("Please put the amount of money you would like to " + "initially deposit into the account: ");
 		userBalance = userInput.nextDouble();
 		Random accountIDGenerator = new Random();
 		int userID = accountIDGenerator.nextInt(2147483647);
@@ -48,6 +54,8 @@ public class ATM {
 		return account;
 	}
 
+	//Presents user with action options
+	//ATMAccount account - passes the account either created previously or logged in
 	public static void userChoice(ATMAccount account) throws FileNotFoundException, IOException, InterruptedException{
 		int selection = 0;
 		do {
@@ -84,6 +92,7 @@ public class ATM {
 
 	}
 
+	//Simulates an ATM Idle Screen i.e. before a credit card is inserted
 	public static void ATMStartScreen() throws FileNotFoundException, IOException, InterruptedException {
 		System.out.println("Welcome to Maze Bank Automated Teller Machine!");
 		System.out.println("1 = Open a new account." + "\n2 = Log In to a current account." + "\n3 = Exit.");
@@ -111,7 +120,7 @@ public class ATM {
 		} while (select != 3);
 	}
 
-	// MAJOR CLUSTERFUCK
+	//Processes a log in with the account ID that a user enters
 	public static ATMAccount LogIn() throws FileNotFoundException, IOException, InterruptedException {
 		ATMAccount account = null;
 		System.out.println("Enter your account ID:");
@@ -174,6 +183,7 @@ public class ATM {
 
 	}
 
+	//Enters account information into accountsdb.txt
 	public static void parseAccountDB(ATMAccount accountNew) throws FileNotFoundException, IOException {
 
 		try {
@@ -197,8 +207,10 @@ public class ATM {
 	}
 
 
+	//Deposit function for balance manipulation
 	public static void depositMoney(ATMAccount account) throws FileNotFoundException {
 		accountsdb = new File("accountsdb.txt");
+		//Use of two dimensional array to account for line number
 		String[][] accountInfo = null;
 
 		if (accountsdb.exists()) {
@@ -300,6 +312,7 @@ public class ATM {
 
 	}
 
+	//Withdraw function for balance manipulation
 	public static void withdrawMoney(ATMAccount account) throws FileNotFoundException {
 
 		// File initialization
@@ -394,6 +407,7 @@ public class ATM {
 
 	}
 
+	//Main method initializes ATMStartScreen method
 	public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
 		ATMStartScreen();
 	}
