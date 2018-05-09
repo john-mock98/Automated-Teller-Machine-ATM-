@@ -6,5 +6,5 @@
 # 
 # Have fun going through it.
 # 
-# NOTE: In order for the ATM to work you must download all files: ATM, ATMAccount and accountsdb.txt!
+# NOTE: In order for the ATM to work you must download all files: ATM.java, ATMAccount.java and accountsdb.txt!
 #
